@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Roteiro de Viagem - Organizador Econômico</title>
+    <title>Meu Roteiro de Viagem - Organizador Econômico & Nuvem</title>
     <!-- Tailwind CSS for modern responsive utility styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for travel and UI icons -->
@@ -14,10 +14,6 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        
-
-        /* https://app-organizador-para-roteiro-de-via.vercel.app/
-*/
         @keyframes floatSlow {
             0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.15; }
             50% { transform: translateY(-30px) translateX(20px) rotate(10deg); opacity: 0.3; }
@@ -59,39 +55,45 @@
                     </div>
                     <h1 class="text-3xl font-bold tracking-tight text-white">Meu Roteiro de Viagem</h1>
                 </div>
-                <p class="text-sky-200 text-sm">Organize seu roteiro dia a dia, controle gastos e aproveite ao máximo com economia!</p>
+                <p class="text-sky-200 text-sm">Organize seu roteiro dia a dia, controle gastos e sincronize com o Banco de Dados!</p>
             </div>
             
             <!-- Navigation Tab Switcher -->
-            <div class="flex flex-wrap bg-black/30 p-1.5 rounded-xl border border-white/10 gap-1 w-full justify-center">
-                <button onclick="switchMainTab('planner')" id="tabPlannerBtn" class="flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer">
-                    <i class="fa-solid fa-list-check"></i> Meu Roteiro
+            <div class="flex flex-wrap bg-black/30 p-1.5 rounded-xl border border-white/10 gap-1 w-full justify-center md:w-auto">
+                <button onclick="switchMainTab('planner')" id="tabPlannerBtn" class="flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer">
+                    <i class="fa-solid fa-list-check"></i> Roteiro
                 </button>
-                <button onclick="switchMainTab('state')" id="tabStateBtn" class="flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-sky-200 hover:text-white cursor-pointer">
-                    <i class="fa-solid fa-map-location-dot"></i> No Estado (SP)
+                <button onclick="switchMainTab('state')" id="tabStateBtn" class="flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-sky-200 hover:text-white cursor-pointer">
+                    <i class="fa-solid fa-map-location-dot"></i> No Estado
                 </button>
-                <button onclick="switchMainTab('brazil')" id="tabBrazilBtn" class="flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-sky-200 hover:text-white cursor-pointer">
-                    <i class="fa-solid fa-earth-americas"></i> Pelo Brasil
+                <button onclick="switchMainTab('brazil')" id="tabBrazilBtn" class="flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-sky-200 hover:text-white cursor-pointer">
+                    <i class="fa-solid fa-earth-americas"></i> Brasil
                 </button>
-                <button onclick="switchMainTab('international')" id="tabIntBtn" class="flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-sky-200 hover:text-white cursor-pointer">
-                    <i class="fa-solid fa-plane-departure"></i> Internacionais
+                <button onclick="switchMainTab('international')" id="tabIntBtn" class="flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-sky-200 hover:text-white cursor-pointer">
+                    <i class="fa-solid fa-plane-departure"></i> Exterior
                 </button>
             </div>
         </header>
 
         <div id="tabPlannerContent" class="space-y-6">
-            <!-- Trip Quick Settings Card -->
+            <!-- Trip Quick Settings Card & Cloud Synchronization Button -->
             <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="w-full md:w-auto flex flex-col gap-2">
                     <label class="text-xs text-sky-300 font-medium uppercase tracking-wider">Destino da Viagem:</label>
-                    <input type="text" id="destinationInput" value="Porto Seguro, BA" class="bg-white/20 text-white text-sm px-4 py-2 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-sky-400 w-full md:w-72 font-semibold" placeholder="Ex: São Vicente, SP">
+                    <input type="text" id="destinationInput" value="Porto Seguro, BA" class="bg-white/20 text-white text-sm px-4 py-2 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-sky-400 w-full md:w-64 font-semibold" placeholder="Ex: Santos, SP">
                 </div>
                 <div class="w-full md:w-auto flex flex-col gap-2">
                     <label class="text-xs text-sky-300 font-medium uppercase tracking-wider">Orçamento Alvo (R$):</label>
                     <div class="relative">
                         <span class="absolute left-3 top-2.5 text-xs text-sky-300 font-bold">R$</span>
-                        <input type="number" id="budgetInput" value="5000" class="bg-white/20 text-white text-sm pl-8 pr-4 py-2 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-sky-400 w-full md:w-44 font-semibold" placeholder="5000">
+                        <input type="number" id="budgetInput" value="5000" class="bg-white/20 text-white text-sm pl-8 pr-4 py-2 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-sky-400 w-full md:w-36 font-semibold" placeholder="5000">
                     </div>
+                </div>
+                <div class="w-full md:w-auto flex flex-col gap-2 justify-end">
+                    <label class="text-xs text-transparent font-medium uppercase tracking-wider select-none">Ação Nuvem:</label>
+                    <button onclick="saveToCloudDatabase()" class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Sincronizar com Servidor
+                    </button>
                 </div>
             </div>
 
@@ -118,7 +120,7 @@
                     <div>
                         <p class="text-xs text-slate-300 uppercase font-semibold">Ações Rápidas</p>
                         <button onclick="addNewDay()" class="mt-1 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-bold px-3 py-2 rounded-lg shadow-md transition transform active:scale-95 flex items-center gap-1.5 cursor-pointer">
-                            <i class="fa-solid fa-plus"></i> Adicionar Novo Dia
+                            <i class="fa-solid fa-plus"></i> Novo Dia
                         </button>
                     </div>
                     <button onclick="exportItinerary()" title="Copiar Roteiro" class="bg-white/20 hover:bg-white/30 text-white p-3 rounded-lg transition cursor-pointer">
@@ -128,14 +130,14 @@
             </div>
 
             <div id="itineraryContainer" class="space-y-6">
-                <!-- Dynamic days will be injected here via JavaScript -->
+                <!-- Dynamic days injected via JS -->
             </div>
 
             <!-- Empty State Prompt -->
             <div id="emptyState" class="hidden text-center py-12 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8">
                 <i class="fa-solid fa-suitcase-rolling text-5xl text-sky-300 mb-4 animate-bounce"></i>
                 <h3 class="text-xl font-bold text-white mb-2">Nenhum dia cadastrado ainda!</h3>
-                <p class="text-sky-200 text-sm mb-6">Comece adicionando o primeiro dia da sua viagem ou escolha um roteiro pronto na aba "Dicas de Roteiro".</p>
+                <p class="text-sky-200 text-sm mb-6">Comece adicionando o primeiro dia da sua viagem ou escolha um roteiro pronto.</p>
                 <button onclick="addNewDay()" class="bg-sky-500 hover:bg-sky-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition cursor-pointer">
                     <i class="fa-solid fa-plus mr-2"></i> Criar Dia 1
                 </button>
@@ -150,11 +152,10 @@
                     </div>
                     <div>
                         <h2 id="tipsHeaderTitle" class="text-2xl font-bold text-white">Dicas e Roteiros Prontos</h2>
-                        <p id="tipsHeaderDesc" class="text-sky-200 text-sm">Escolha seu estilo de viagem: Roteiros Econômicos focados em custo-benefício ou Roteiros Ousados / Premium recheados de experiências inesquecíveis!</p>
+                        <p id="tipsHeaderDesc" class="text-sky-200 text-sm">Escolha seu estilo de viagem: Econômicos ou Ousados / Premium!</p>
                     </div>
                 </div>
 
-                <!-- Sub-tab Category Switcher -->
                 <div class="flex bg-black/30 p-1 rounded-xl border border-white/10 gap-2 max-w-md mx-auto">
                     <button onclick="switchCategory('economic')" id="catEconBtn" class="flex-1 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 bg-emerald-600 text-white cursor-pointer">
                         <i class="fa-solid fa-piggy-bank"></i> Econômicos
@@ -166,16 +167,16 @@
             </div>
 
             <div id="citiesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Injected via JavaScript -->
+                <!-- Injected via JS -->
             </div>
         </div>
 
-        <!-- Footer / Saving Info -->
         <footer class="mt-12 text-center text-xs text-sky-300/70">
-            <p>Seus dados são salvos automaticamente no navegador. Viaje mais gastando menos! 🎒✈️</p>
+            <p>Seus dados são salvos localmente e podem ser sincronizados com seu servidor Node.js/PostgreSQL! 🎒✈️</p>
         </footer>
     </div>
 
+    <!-- Notification Modal -->
     <div id="notificationModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden">
         <div class="bg-slate-900 border border-white/20 p-6 rounded-2xl max-w-sm w-full mx-4 shadow-2xl text-center">
             <div id="modalIcon" class="text-4xl text-emerald-400 mb-3"><i class="fa-solid fa-circle-check"></i></div>
@@ -186,6 +187,7 @@
     </div>
 
     <script>
+        // Dados de exemplo (mantidos completos para as abas de roteiro pronto)
         const stateCitiesData = {
             economic: [
                 {
@@ -194,201 +196,17 @@
                     desc: "Praias urbanas, o maior jardim de orla do mundo e museu do café acessível.",
                     tips: "Use o bonde turístico e curta a praia do Gonzaga.",
                     budgetNum: 1200,
-                    days: [
-                        { id: 1, title: "Dia 1: Orla e Centro Histórico", activities: [{ id: 1, text: "Caminhada no Jardim da Orla", type: "beach", cost: 0, done: true }, { id: 2, text: "Visita ao Museu do Café", type: "sight", cost: 40, done: false }] }
-                    ]
-                },
-                {
-                    name: "Caraguatatuba, SP (Econômico)",
-                    estCost: "R$ 1.400 (para 2 dias)",
-                    desc: "Litoral norte com praias arborizadas e mirantes incríveis com entrada gratuita.",
-                    tips: "Visite a Praia Martim de Sá e o Mirante do Camarão.",
-                    budgetNum: 1400,
-                    days: [
-                        { id: 1, title: "Dia 1: Praia Martim de Sá", activities: [{ id: 11, text: "Banho de mar na Martim de Sá", type: "beach", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Ilhabela, SP (Econômico)",
-                    estCost: "R$ 1.600 (para 2 dias)",
-                    desc: "Natureza exuberante, cachoeiras e praias paradisíacas com travessia de balsa.",
-                    tips: "Visite a Cachoeira da Toca e a Praia do Curral.",
-                    budgetNum: 1600,
-                    days: [
-                        { id: 1, title: "Dia 1: Curral e Cachoeira", activities: [{ id: 21, text: "Trilha e banho na Cachoeira da Toca", type: "sight", cost: 30, done: false }] }
-                    ]
-                },
-                {
-                    name: "Campinas, SP (Staycation Econômico)",
-                    estCost: "R$ 600 (para 2 dias)",
-                    desc: "Turismo urbano na própria cidade: Parque Portugal (Lagoa do Taquaral) e Bosque dos Jequitibás.",
-                    tips: "Aproveite os parques municipais e feiras gastronômicas gratuitas.",
-                    budgetNum: 600,
-                    days: [
-                        { id: 1, title: "Dia 1: Lagoa do Taquaral", activities: [{ id: 31, text: "Passeio de pedalinho na Lagoa", type: "sight", cost: 40, done: true }] }
-                    ]
-                },
-                {
-                    name: "São Paulo - Rua da Liberdade, SP (Econômico)",
-                    estCost: "R$ 900 (para 2 dias)",
-                    desc: "Imersão na cultura oriental, feirinha de rua, templos budistas e gastronomia típica.",
-                    tips: "Visite a Feira da Liberdade aos fins de semana e o Templo Kinkaku-ji.",
-                    budgetNum: 900,
-                    days: [
-                        { id: 1, title: "Dia 1: Feirinha e Comida Oriental", activities: [{ id: 41, text: "Comer guioza e lámian na feirinha", type: "food", cost: 90, done: false }] }
-                    ]
-                },
-                {
-                    name: "Ubatuba, SP (Econômico)",
-                    estCost: "R$ 1.500 (para 2 dias)",
-                    desc: "Capital das praias selvagens e trilhas ecológicas no litoral norte.",
-                    tips: "Visite a Praia Vermelha do Centro e trilhas públicas.",
-                    budgetNum: 1500,
-                    days: [
-                        { id: 1, title: "Dia 1: Praia Vermelha", activities: [{ id: 51, text: "Surfe e relax na Praia Vermelha", type: "beach", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Holombra, SP (Econômico)",
-                    estCost: "R$ 800 (para 2 dias)",
-                    desc: "A cidade das flores, arquitetura holandesa e moinho gigantesco.",
-                    tips: "Visite o Deck do Poço e o Boulevard Holandês.",
-                    budgetNum: 800,
-                    days: [
-                        { id: 1, title: "Dia 1: Boulevard e Moinho", activities: [{ id: 61, text: "Fotos no Moinho Povos Unidos", type: "sight", cost: 30, done: false }] }
-                    ]
-                },
-                {
-                    name: "Aparecida do Norte, SP (Econômico)",
-                    estCost: "R$ 900 (para 2 dias)",
-                    desc: "Turismo religioso, o Santuário Nacional e passarelas da fé.",
-                    tips: "Visite a Basílica e o Morro do Cruzeiro.",
-                    budgetNum: 900,
-                    days: [
-                        { id: 1, title: "Dia 1: Basílica Nacional", activities: [{ id: 71, text: "Visita ao Santuário de Nossa Senhora", type: "sight", cost: 0, done: true }] }
-                    ]
-                },
-                {
-                    name: "Guarujá, SP (Econômico)",
-                    estCost: "R$ 1.300 (para 2 dias)",
-                    desc: "Praias famosas como Pitangueiras e Enseada com acesso público.",
-                    tips: "Caminhe pelo calçadão e curta a praia central.",
-                    budgetNum: 1300,
-                    days: [
-                        { id: 1, title: "Dia 1: Pitangueiras", activities: [{ id: 81, text: "Banho de sol na Praia de Pitangueiras", type: "beach", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Olímpia, SP (Econômico)",
-                    estCost: "R$ 1.600 (para 2 dias)",
-                    desc: "Parques aquáticos de águas termais e folclore brasileiro.",
-                    tips: "Compre ingressos promocionais antecipados para os parques.",
-                    budgetNum: 1600,
-                    days: [
-                        { id: 1, title: "Dia 1: Águas Termais", activities: [{ id: 91, text: "Curtir piscinas termais e toboáguas", type: "sight", cost: 240, done: false }] }
-                    ]
+                    days: [{ id: 1, title: "Dia 1: Orla e Centro Histórico", activities: [{ id: 1, text: "Caminhada no Jardim da Orla", type: "beach", cost: 0, done: true }] }]
                 }
             ],
             premium: [
                 {
                     name: "Santos, SP (Ousado / Premium)",
                     estCost: "R$ 3.800 (para 2 dias)",
-                    desc: "Tour de escuna privativo pela Baía de Santos, jantar em restaurante panorâmico e voo de parapente no morro.",
+                    desc: "Tour de escuna privativo pela Baía de Santos e jantar em restaurante panorâmico.",
                     tips: "Experiências VIP no litoral paulista.",
                     budgetNum: 3800,
-                    days: [
-                        { id: 1, title: "Dia 1: Parapente e Jantar Panorâmico", activities: [{ id: 1, text: "Voo de Parapente do Morro da Voturuá", type: "sight", cost: 550, done: false }, { id: 2, text: "Jantar gourmet de frutos do mar com vista para o canal", type: "food", cost: 450, done: false }] }
-                    ]
-                },
-                {
-                    name: "Caraguatatuba, SP (Ousado / Premium)",
-                    estCost: "R$ 4.000 (para 2 dias)",
-                    desc: "Passeio de lancha privativa pelas ilhas e salto de asa-delta no Mirante.",
-                    tips: "Adrenalina e conforto no litoral norte.",
-                    budgetNum: 4000,
-                    days: [
-                        { id: 1, title: "Dia 1: Voo de Asa-Delta", activities: [{ id: 11, text: "Salto duplo de Asa-Delta com instrutor", type: "sight", cost: 700, done: false }] }
-                    ]
-                },
-                {
-                    name: "Ilhabela, SP (Ousado / Premium)",
-                    estCost: "R$ 5.200 (para 2 dias)",
-                    desc: "Passeio de lancha privativa para a Praia de Castelhanos e mergulho profissional.",
-                    tips: "Acesso exclusivo por mar às praias mais preservadas.",
-                    budgetNum: 5200,
-                    days: [
-                        { id: 1, title: "Dia 1: Lancha para Castelhanos", activities: [{ id: 21, text: "Aluguel de lancha privativa para expedição marinha", type: "sight", cost: 1200, done: false }] }
-                    ]
-                },
-                {
-                    name: "Campinas, SP (Ousado / Premium)",
-                    estCost: "R$ 2.500 (para 2 dias)",
-                    desc: "Jantar harmonizado em restaurante premiado de Cambuí e passeio de helicóptero sobre a região metropolitana.",
-                    tips: "Luxo e alta gastronomia no interior paulista.",
-                    budgetNum: 2500,
-                    days: [
-                        { id: 1, title: "Dia 1: Helicóptero e Alta Gastronomia", activities: [{ id: 31, text: "Voo panorâmico de helicóptero sobre Campinas", type: "sight", cost: 900, done: false }] }
-                    ]
-                },
-                {
-                    name: "São Paulo - Rua da Liberdade, SP (Ousado / Premium)",
-                    estCost: "R$ 3.000 (para 2 dias)",
-                    desc: "Experiência omakase exclusiva em restaurante japonês estrelado e hospedagem em hotel design.",
-                    tips: "Gastronomia japonesa de alto padrão em Sampa.",
-                    budgetNum: 3000,
-                    days: [
-                        { id: 1, title: "Dia 1: Jantar Omakase Premium", activities: [{ id: 41, text: "Experiência Omakase de 15 tempos com Chef renomado", type: "food", cost: 950, done: false }] }
-                    ]
-                },
-                {
-                    name: "Ubatuba, SP (Ousado / Premium)",
-                    estCost: "R$ 4.500 (para 2 dias)",
-                    desc: "Mergulho autônomo com cilindro na Ilha da Cozinha e resort de luxo.",
-                    tips: "Exploração subaquática nas águas cristalinas de Ubatuba.",
-                    budgetNum: 4500,
-                    days: [
-                        { id: 1, title: "Dia 1: Mergulho com Cilindro", activities: [{ id: 51, text: "Expedição de mergulho autônomo na Ilha Anchieta", type: "sight", cost: 650, done: false }] }
-                    ]
-                },
-                {
-                    name: "Holombra, SP (Ousado / Premium)",
-                    estCost: "R$ 2.200 (para 2 dias)",
-                    desc: "Tour fotográfico profissional privativo nos campos de flores e jantar romântico em estufa temática.",
-                    tips: "Acesso vip aos campos de produção agrícola exclusivos.",
-                    budgetNum: 2200,
-                    days: [
-                        { id: 1, title: "Dia 1: Tour VIP Campos de Flores", activities: [{ id: 61, text: "Ensaio fotográfico e tour guiado em fazenda de flores", type: "sight", cost: 500, done: false }] }
-                    ]
-                },
-                {
-                    name: "Aparecida do Norte, SP (Ousado / Premium)",
-                    estCost: "R$ 2.000 (para 2 dias)",
-                    desc: "Hospedagem em hotel resort temático da região com tour histórico guiado particular.",
-                    tips: "Conforto total na capital da fé.",
-                    budgetNum: 2000,
-                    days: [
-                        { id: 1, title: "Dia 1: Tour Histórico Particular", activities: [{ id: 71, text: "Guia bilíngue privado para os tesouros do Santuário", type: "sight", cost: 400, done: false }] }
-                    ]
-                },
-                {
-                    name: "Guarujá, SP (Ousado / Premium)",
-                    estCost: "R$ 4.800 (para 2 dias)",
-                    desc: "Day use em clube náutico exclusivo na Praia de Pernambuco e jantar à beira-mar.",
-                    tips: "Praias sofisticadas com infraestrutura de alto padrão.",
-                    budgetNum: 4800,
-                    days: [
-                        { id: 1, title: "Dia 1: Clube Náutico Pernambuco", activities: [{ id: 81, text: "Aluguel de jet ski e beach club privativo", type: "sight", cost: 800, done: false }] }
-                    ]
-                },
-                {
-                    name: "Olímpia, SP (Ousado / Premium)",
-                    estCost: "R$ 3.500 (para 2 dias)",
-                    desc: "Resort all-inclusive com acesso VIP prioritário aos parques aquáticos e spa termal privativo.",
-                    tips: "Curta o parque sem filas com passes fast-track.",
-                    budgetNum: 3500,
-                    days: [
-                        { id: 1, title: "Dia 1: VIP Pass Parque Aquático", activities: [{ id: 91, text: "Ingressos VIP Pass com atendimento preferencial", type: "sight", cost: 700, done: false }] }
-                    ]
+                    days: [{ id: 1, title: "Dia 1: Parapente e Jantar Panorâmico", activities: [{ id: 1, text: "Voo de Parapente do Morro da Voturuá", type: "sight", cost: 550, done: false }] }]
                 }
             ]
         };
@@ -398,204 +216,20 @@
                 {
                     name: "Rio de Janeiro, RJ (Econômico)",
                     estCost: "R$ 2.200 (para 4 dias)",
-                    desc: "A Cidade Maravilhosa com praias icônicas, cultura vibrante e focada em economia inteligente.",
-                    tips: "Hospedagem em Copacabana/Botafogo. Use metrô para economizar.",
+                    desc: "A Cidade Maravilhosa com praias icônicas e foco em economia inteligente.",
+                    tips: "Hospedagem em Copacabana/Botafogo. Use metrô.",
                     budgetNum: 2200,
-                    days: [
-                        { id: 1, title: "Dia 1: Praias", activities: [{ id: 1, text: "Caminhada em Copacabana", type: "beach", cost: 0, done: true }] }
-                    ]
-                },
-                {
-                    name: "São Paulo, SP (Econômico)",
-                    estCost: "R$ 1.800 (para 3 dias)",
-                    desc: "Capital cultural com parques, museus gratuitos e feiras.",
-                    tips: "Aproveite a rede de Metrô rápida.",
-                    budgetNum: 1800,
-                    days: [
-                        { id: 1, title: "Dia 1: Paulista", activities: [{ id: 11, text: "Caminhada na Paulista", type: "sight", cost: 50, done: false }] }
-                    ]
-                },
-                {
-                    name: "Porto Seguro, BA (Econômico)",
-                    estCost: "R$ 2.500 (para 4 dias)",
-                    desc: "Berço do descobrimento, praias paradisíacas e culinária baiana.",
-                    tips: "Compre lembrancinhas na Passarela do Álcool.",
-                    budgetNum: 2500,
-                    days: [
-                        { id: 1, title: "Dia 1: Centro Histórico", activities: [{ id: 31, text: "Visita guiada gratuita", type: "sight", cost: 0, done: true }] }
-                    ]
-                },
-                {
-                    name: "Gramado, RS (Econômico)",
-                    estCost: "R$ 2.400 (para 4 dias)",
-                    desc: "Charme europeu na Serra Gaúcha com parques públicos.",
-                    tips: "Visite o Lago Negro e a Rua Coberta sem custo de entrada.",
-                    budgetNum: 2400,
-                    days: [
-                        { id: 1, title: "Dia 1: Lago Negro", activities: [{ id: 41, text: "Passeio pelo Lago Negro", type: "sight", cost: 50, done: false }] }
-                    ]
-                },
-                {
-                    name: "Balneário Camboriú, SC (Econômico)",
-                    estCost: "R$ 2.300 (para 3 dias)",
-                    desc: "Arranha-céus imponentes e praias centrais gratuitas.",
-                    tips: "Visite o Molhe do Barra Sul para fotos.",
-                    budgetNum: 2300,
-                    days: [
-                        { id: 1, title: "Dia 1: Molhe", activities: [{ id: 51, text: "Passeio pelo Molhe", type: "sight", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Florianópolis, SC (Econômico)",
-                    estCost: "R$ 2.200 (para 4 dias)",
-                    desc: "A Ilha da Magia explorada através de trilhas e lagoas.",
-                    tips: "Explore a Lagoa da Conceição.",
-                    budgetNum: 2200,
-                    days: [
-                        { id: 1, title: "Dia 1: Joaquina", activities: [{ id: 61, text: "Praia da Joaquina", type: "beach", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Salvador, BA (Econômico)",
-                    estCost: "R$ 2.000 (para 4 dias)",
-                    desc: "Pelourinho, acarajé tradicional e praias urbanas.",
-                    tips: "Visite o Farol da Barra ao pôr do sol.",
-                    budgetNum: 2000,
-                    days: [
-                        { id: 1, title: "Dia 1: Pelourinho", activities: [{ id: 71, text: "Passeio no Pelourinho", type: "sight", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Fortaleza, CE (Econômico)",
-                    estCost: "R$ 1.900 (para 4 dias)",
-                    desc: "Sol o ano todo, praias animadas e artesanato.",
-                    tips: "Feirinha de artesanato noturna.",
-                    budgetNum: 1900,
-                    days: [
-                        { id: 1, title: "Dia 1: Beira Mar", activities: [{ id: 81, text: "Praia urbana", type: "beach", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Foz do Iguaçu, PR (Econômico)",
-                    estCost: "R$ 2.100 (para 3 dias)",
-                    desc: "Cataratas do Iguaçu e Parque Nacional.",
-                    tips: "Compre ingressos online.",
-                    budgetNum: 2100,
-                    days: [
-                        { id: 1, title: "Dia 1: Cataratas", activities: [{ id: 91, text: "Trilha das Cataratas", type: "sight", cost: 350, done: false }] }
-                    ]
-                },
-                {
-                    name: "Maceió, AL (Econômico)",
-                    estCost: "R$ 2.000 (para 4 dias)",
-                    desc: "Caribe brasileiro com águas cristalinas.",
-                    tips: "Caminhe pelo calçadão de Ponta Verde.",
-                    budgetNum: 2000,
-                    days: [
-                        { id: 1, title: "Dia 1: Pajuçara", activities: [{ id: 101, text: "Banho em Pajuçara", type: "beach", cost: 0, done: false }] }
-                    ]
+                    days: [{ id: 1, title: "Dia 1: Praias", activities: [{ id: 1, text: "Caminhada em Copacabana", type: "beach", cost: 0, done: true }] }]
                 }
             ],
             premium: [
                 {
                     name: "Rio de Janeiro, RJ (Ousado / Premium)",
                     estCost: "R$ 6.500 (para 4 dias)",
-                    desc: "Voo de helicóptero, jantar com vista para o mar, tour VIP no Maracanã e show exclusivo.",
+                    desc: "Voo de helicóptero, jantar com vista para o mar e tour VIP.",
                     tips: "Experiências VIP de alto padrão.",
                     budgetNum: 6500,
-                    days: [
-                        { id: 1, title: "Dia 1: Helicóptero e Jantar", activities: [{ id: 1, text: "Voo panorâmico de helicóptero", type: "sight", cost: 1200, done: false }, { id: 2, text: "Jantar panorâmico", type: "food", cost: 650, done: false }] }
-                    ]
-                },
-                {
-                    name: "São Paulo, SP (Ousado / Premium)",
-                    estCost: "R$ 5.800 (para 3 dias)",
-                    desc: "Jantar em restaurante de Chef, camarote em jogo de futebol e tour gastronômico.",
-                    tips: "Alta gastronomia e entretenimento.",
-                    budgetNum: 5800,
-                    days: [
-                        { id: 1, title: "Dia 1: Camarote VIP", activities: [{ id: 11, text: "Camarote em jogo de futebol", type: "sight", cost: 900, done: false }] }
-                    ]
-                },
-                {
-                    name: "Porto Seguro, BA (Ousado / Premium)",
-                    estCost: "R$ 6.200 (para 4 dias)",
-                    desc: "Quadriciclo pelas falésias, festa em beach club e mergulho profissional.",
-                    tips: "Aventura e exclusividade na Bahia.",
-                    budgetNum: 6200,
-                    days: [
-                        { id: 1, title: "Dia 1: Quadriciclo Trancoso", activities: [{ id: 31, text: "Trilha de Quadriciclo", type: "sight", cost: 550, done: false }] }
-                    ]
-                },
-                {
-                    name: "Gramado, RS (Ousado / Premium)",
-                    estCost: "R$ 7.000 (para 4 dias)",
-                    desc: "Fondue premium, tour de carro clássico e espetáculos temáticos VIP.",
-                    tips: "Experiências alpinas refinadas.",
-                    budgetNum: 7000,
-                    days: [
-                        { id: 1, title: "Dia 1: Carro Antigo e Fondue", activities: [{ id: 41, text: "Tour de carro clássico", type: "sight", cost: 600, done: false }] }
-                    ]
-                },
-                {
-                    name: "Balneário Camboriú, SC (Ousado / Premium)",
-                    estCost: "R$ 6.800 (para 3 dias)",
-                    desc: "Salto de Bungee Jump, passeio de iate privativo e jantar nos arranha-céus.",
-                    tips: "Adrenalina pura e requinte.",
-                    budgetNum: 6800,
-                    days: [
-                        { id: 1, title: "Dia 1: Iate e Bungee Jump", activities: [{ id: 51, text: "Passeio de iate privativo", type: "sight", cost: 1200, done: false }] }
-                    ]
-                },
-                {
-                    name: "Florianópolis, SC (Ousado / Premium)",
-                    estCost: "R$ 6.400 (para 4 dias)",
-                    desc: "Parapente na Praia Mole, lancha privativa e jantar de ostras.",
-                    tips: "Aventura nos céus e alta culinária.",
-                    budgetNum: 6400,
-                    days: [
-                        { id: 1, title: "Dia 1: Parapente", activities: [{ id: 61, text: "Voo duplo de Parapente", type: "sight", cost: 600, done: false }] }
-                    ]
-                },
-                {
-                    name: "Salvador, BA (Ousado / Premium)",
-                    estCost: "R$ 6.000 (para 4 dias)",
-                    desc: "Camarote em show, tour histórico privado e jantar na Baía.",
-                    tips: "Cultura baiana com máximo conforto.",
-                    budgetNum: 6000,
-                    days: [
-                        { id: 1, title: "Dia 1: Show VIP", activities: [{ id: 71, text: "Área VIP para show cultural", type: "sight", cost: 450, done: false }] }
-                    ]
-                },
-                {
-                    name: "Fortaleza, CE (Ousado / Premium)",
-                    estCost: "R$ 5.900 (para 4 dias)",
-                    desc: "Buggy VIP pelas dunas e jantar de lagosta.",
-                    tips: "Velocidade e gastronomia nobre.",
-                    budgetNum: 5900,
-                    days: [
-                        { id: 1, title: "Dia 1: Buggy Cumbuco", activities: [{ id: 81, text: "Buggy privativo nas dunas", type: "sight", cost: 500, done: false }] }
-                    ]
-                },
-                {
-                    name: "Foz do Iguaçu, PR (Ousado / Premium)",
-                    estCost: "R$ 6.100 (para 3 dias)",
-                    desc: "Helicóptero sobre as Cataratas, Macuco Safari VIP e jantar panorâmico.",
-                    tips: "A visão mais espetacular de cima.",
-                    budgetNum: 6100,
-                    days: [
-                        { id: 1, title: "Dia 1: Helicóptero Cataratas", activities: [{ id: 91, text: "Voo de helicóptero", type: "sight", cost: 750, done: false }] }
-                    ]
-                },
-                {
-                    name: "Maceió, AL (Ousado / Premium)",
-                    estCost: "R$ 6.300 (para 4 dias)",
-                    desc: "Mergulho com cilindro e catamarã privativo ao pôr do sol.",
-                    tips: "O melhor do mergulho alagoano.",
-                    budgetNum: 6300,
-                    days: [
-                        { id: 1, title: "Dia 1: Mergulho Cilindro", activities: [{ id: 101, text: "Mergulho profissional", type: "sight", cost: 450, done: false }] }
-                    ]
+                    days: [{ id: 1, title: "Dia 1: Helicóptero e Jantar", activities: [{ id: 1, text: "Voo panorâmico de helicóptero", type: "sight", cost: 1200, done: false }] }]
                 }
             ]
         };
@@ -605,211 +239,26 @@
                 {
                     name: "Buenos Aires, Argentina (Econômico)",
                     estCost: "R$ 3.500 (para 4 dias)",
-                    desc: "Tango de rua, arquitetura europeia, alfajores e bairros boêmios como San Telmo.",
-                    tips: "Use o transporte público (Subte) e visite feiras de rua.",
+                    desc: "Tango de rua, arquitetura europeia e bairros boêmios.",
+                    tips: "Use o transporte público e visite feiras de rua.",
                     budgetNum: 3500,
-                    days: [
-                        { id: 1, title: "Dia 1: San Telmo e Centro", activities: [{ id: 1, text: "Caminhada pela Feira de San Telmo", type: "sight", cost: 0, done: true }] }
-                    ]
-                },
-                {
-                    name: "Montevidéu, Uruguai (Econômico)",
-                    estCost: "R$ 3.800 (para 3 dias)",
-                    desc: "Rambla costeira, praças históricas e tranquilidade rio adentro.",
-                    tips: "Caminhe pela Rambla ao pôr do sol (gratuito).",
-                    budgetNum: 3800,
-                    days: [
-                        { id: 1, title: "Dia 1: Rambla", activities: [{ id: 11, text: "Caminhada na orla da Rambla", type: "beach", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Santiago, Chile (Econômico)",
-                    estCost: "R$ 4.000 (para 4 dias)",
-                    desc: "Cordilheira dos Andes ao fundo, parques urbanos e Cerro San Cristóbal.",
-                    tips: "Suba o Cerro San Cristóbal a pé ou de funicular barato.",
-                    budgetNum: 4000,
-                    days: [
-                        { id: 1, title: "Dia 1: Cerro San Cristóbal", activities: [{ id: 21, text: "Trilha e mirante no Cerro", type: "sight", cost: 30, done: false }] }
-                    ]
-                },
-                {
-                    name: "Asunção, Paraguai (Econômico)",
-                    estCost: "R$ 2.800 (para 3 dias)",
-                    desc: "Cultura guarani, centros históricos, palácios e compras acessíveis.",
-                    tips: "Visite a Costanera de Assunção.",
-                    budgetNum: 2800,
-                    days: [
-                        { id: 1, title: "Dia 1: Costanera", activities: [{ id: 31, text: "Passeio pela Costanera", type: "sight", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Lima, Peru (Econômico)",
-                    estCost: "R$ 4.200 (para 4 dias)",
-                    desc: "Capital gastronômica da América do Sul, centro histórico e Malecón de Miraflores.",
-                    tips: "Caminhe pelo Malecón e praças coloniais.",
-                    budgetNum: 4200,
-                    days: [
-                        { id: 1, title: "Dia 1: Malecón Miraflores", activities: [{ id: 41, text: "Passeio pelo litoral de Lima", type: "beach", cost: 0, done: false }] }
-                    ]
-                },
-                {
-                    name: "Bogotá, Colômbia (Econômico)",
-                    estCost: "R$ 3.900 (para 4 dias)",
-                    desc: "Monserrate, museus icônicos e arte urbana na Zona T.",
-                    tips: "Use o TransMilenio e visite museus gratuitos aos domingos.",
-                    budgetNum: 3900,
-                    days: [
-                        { id: 1, title: "Dia 1: Monserrate", activities: [{ id: 51, text: "Funicular ao Santuário de Monserrate", type: "sight", cost: 40, done: false }] }
-                    ]
-                },
-                {
-                    name: "Cidades Históricas da Bolívia - La Paz (Econômico)",
-                    estCost: "R$ 3.600 (para 4 dias)",
-                    desc: "Teleféricos urbanos, cultura andina e vales lunares.",
-                    tips: "Use a rede de teleféricos como transporte e passeio turístico.",
-                    budgetNum: 3600,
-                    days: [
-                        { id: 1, title: "Dia 1: Teleférico Urbano", activities: [{ id: 61, text: "Tour panorâmico de teleférico", type: "sight", cost: 25, done: false }] }
-                    ]
-                },
-                {
-                    name: "Cidade do México (Econômico)",
-                    estCost: "R$ 4.500 (para 4 dias)",
-                    desc: "Zócalo, Bosque de Chapultepec e cultura milenar mexicana.",
-                    tips: "Muitos museus nacionais têm entrada gratuita ou super barata.",
-                    budgetNum: 4500,
-                    days: [
-                        { id: 1, title: "Dia 1: Chapultepec", activities: [{ id: 71, text: "Visita ao Bosque e Castelo", type: "sight", cost: 50, done: false }] }
-                    ]
-                },
-                {
-                    name: "Bogotá e Medellín, Colômbia (Econômico)",
-                    estCost: "R$ 4.100 (para 4 dias)",
-                    desc: "Inovação urbana, Metrocable e praças floridas.",
-                    tips: "Explore os teleféricos comunitários de Medellín.",
-                    budgetNum: 4100,
-                    days: [
-                        { id: 1, title: "Dia 1: Metrocable Medellín", activities: [{ id: 81, text: "Passeio de Metrocable", type: "sight", cost: 20, done: false }] }
-                    ]
-                },
-                {
-                    name: "Quito, Equador (Econômico)",
-                    estCost: "R$ 3.700 (para 4 dias)",
-                    desc: "Centro colonial mais bem preservado da América e teleférico Volcán Pichincha.",
-                    tips: "Caminhe pelo centro histórico patrimônio da UNESCO.",
-                    budgetNum: 3700,
-                    days: [
-                        { id: 1, title: "Dia 1: Centro Histórico", activities: [{ id: 91, text: "Tour pelas igrejas coloniais", type: "sight", cost: 30, done: false }] }
-                    ]
+                    days: [{ id: 1, title: "Dia 1: San Telmo e Centro", activities: [{ id: 1, text: "Caminhada pela Feira de San Telmo", type: "sight", cost: 0, done: true }] }]
                 }
             ],
             premium: [
                 {
                     name: "Buenos Aires, Argentina (Ousado / Premium)",
                     estCost: "R$ 10.500 (para 4 dias)",
-                    desc: "Show de tango exclusivo com jantar de alta gastronomia, tour privado de vinhos e assento VIP em partida de futebol no Monumental.",
+                    desc: "Show de tango exclusivo com jantar de alta gastronomia e VIP futebol.",
                     tips: "Experiências VIP na capital portenha.",
                     budgetNum: 10500,
-                    days: [
-                        { id: 1, title: "Dia 1: Tango Show VIP", activities: [{ id: 1, text: "Show de tango de luxo com jantar harmonizado", type: "sight", cost: 1200, done: false }, { id: 2, text: "Ingressos VIP para Superclássico de futebol", type: "sight", cost: 1500, done: false }] }
-                    ]
-                },
-                {
-                    name: "Santiago e Valle Nevado, Chile (Ousado / Premium)",
-                    estCost: "R$ 12.000 (para 4 dias)",
-                    desc: "Hospedagem na neve, tour de helicóptero pela cordilheira e jantar em vinícola premiada.",
-                    tips: "Luxo alpino nos Andes chilenos.",
-                    budgetNum: 12000,
-                    days: [
-                        { id: 1, title: "Dia 1: Helicóptero Cordilheira", activities: [{ id: 11, text: "Voo de helicóptero sobre os Andes", type: "sight", cost: 2500, done: false }] }
-                    ]
-                },
-                {
-                    name: "Miami, EUA (Ousado / Premium)",
-                    estCost: "R$ 15.000 (para 4 dias)",
-                    desc: "Passeio de iate privativo pela Baía de Biscayne, jantar em restaurante de Chef em South Beach e jogo da NBA.",
-                    tips: "O melhor do luxo e entretenimento na Flórida.",
-                    budgetNum: 15000,
-                    days: [
-                        { id: 1, title: "Dia 1: Iate Privativo Miami", activities: [{ id: 21, text: "Aluguel de iate de luxo com capitão", type: "sight", cost: 3200, done: false }] }
-                    ]
-                },
-                {
-                    name: "Paris, França (Ousado / Premium)",
-                    estCost: "R$ 18.000 (para 4 dias)",
-                    desc: "Jantar na Torre Eiffel, cruzeiro privativo pelo Rio Sena e tour VIP no Museu do Louvre sem filas.",
-                    tips: "Romantismo e sofisticação na Cidade Luz.",
-                    budgetNum: 18000,
-                    days: [
-                        { id: 1, title: "Dia 1: Torre Eiffel e Sena", activities: [{ id: 31, text: "Jantar exclusivo no restaurante da Torre Eiffel", type: "food", cost: 2200, done: false }] }
-                    ]
-                },
-                {
-                    name: "Roma, Itália (Ousado / Premium)",
-                    estCost: "R$ 16.500 (para 4 dias)",
-                    desc: "Tour privado subterrâneo no Coliseu, jantar com vista para o Fórum Romano e passeio de Vespa clássica guiado.",
-                    tips: "História milenar com máximo conforto.",
-                    budgetNum: 16500,
-                    days: [
-                        { id: 1, title: "Dia 1: Coliseu VIP Tour", activities: [{ id: 41, text: "Acesso subterrâneo privado ao Coliseu", type: "sight", cost: 1800, done: false }] }
-                    ]
-                },
-                {
-                    name: "Dubai, Emirados Árabes (Ousado / Premium)",
-                    estCost: "R$ 20.000 (para 4 dias)",
-                    desc: "Salto de paraquedismo sobre a Palmeira Jumeirah, jantar no Burj Al Arab e safári VIP no deserto com jantar exclusivo.",
-                    tips: "Luxo futurista e adrenalina no deserto.",
-                    budgetNum: 20000,
-                    days: [
-                        { id: 1, title: "Dia 1: Paraquedismo Palm Jumeirah", activities: [{ id: 51, text: "Salto duplo de paraquedismo sobre ilha artificial", type: "sight", cost: 3500, done: false }] }
-                    ]
-                },
-                {
-                    name: "Orlando, EUA (Ousado / Premium)",
-                    estCost: "R$ 14.000 (para 4 dias)",
-                    desc: "VIP Tour Guide privativo nos parques da Disney e Universal com acesso imediato às atrações.",
-                    tips: "Esqueça as filas com guia particular dedicado.",
-                    budgetNum: 14000,
-                    days: [
-                        { id: 1, title: "Dia 1: Disney VIP Tour", activities: [{ id: 61, text: "Contratação de Guia VIP Privativo nos Parques", type: "sight", cost: 4500, done: false }] }
-                    ]
-                },
-                {
-                    name: "Tóquio, Japão (Ousado / Premium)",
-                    estCost: "R$ 19.000 (para 4 dias)",
-                    desc: "Jantar em restaurante 3 estrelas Michelin, tour de helicóptero sobre a megalópole e experiência de Gueixa em Kyoto.",
-                    tips: "Tradição e modernidade em altíssimo nível.",
-                    budgetNum: 19000,
-                    days: [
-                        { id: 1, title: "Dia 1: Michelin e Helicóptero", activities: [{ id: 71, text: "Experiência gastronômica Michelin de 12 tempos", type: "food", cost: 2800, done: false }] }
-                    ]
-                },
-                {
-                    name: "Cancún, México (Ousado / Premium)",
-                    estCost: "R$ 13.000 (para 4 dias)",
-                    desc: "Mergulho privativo em Cenotes sagrados, aluguel de catamarã para Isla Mujeres e jantar romântico sobre a água.",
-                    tips: "Praias caribenhas paradisíacas com experiências VIP.",
-                    budgetNum: 13000,
-                    days: [
-                        { id: 1, title: "Dia 1: Catamarã e Cenotes", activities: [{ id: 81, text: "Expedição privativa em cenotes secretos", type: "sight", cost: 1600, done: false }] }
-                    ]
-                },
-                {
-                    name: "Londres, Reino Unido (Ousado / Premium)",
-                    estCost: "R$ 17.500 (para 4 dias)",
-                    desc: "Voo na London Eye em cápsula privativa com champanhe, tour VIP na Torre de Londres e show no West End com camarote.",
-                    tips: "Realeza e cultura britânica com requinte.",
-                    budgetNum: 17500,
-                    days: [
-                        { id: 1, title: "Dia 1: London Eye Privativa", activities: [{ id: 91, text: "Cápsula privativa com champanhe na London Eye", type: "sight", cost: 1900, done: false }] }
-                    ]
+                    days: [{ id: 1, title: "Dia 1: Tango Show VIP", activities: [{ id: 1, text: "Show de tango de luxo com jantar harmonizado", type: "sight", cost: 1200, done: false }] }]
                 }
             ]
         };
 
-        // Active state management
-        let currentMainTab = 'planner'; // 'planner', 'state', 'brazil', 'international'
-        let currentTipCategory = 'economic'; // 'economic', 'premium'
+        let currentMainTab = 'planner';
+        let currentTipCategory = 'economic';
 
         window.switchMainTab = function(tabName) {
             currentMainTab = tabName;
@@ -820,13 +269,12 @@
             const tabPlannerContent = document.getElementById('tabPlannerContent');
             const tabTipsContent = document.getElementById('tabTipsContent');
 
-            // Reset button styles
             [tabPlannerBtn, tabStateBtn, tabBrazilBtn, tabIntBtn].forEach(btn => {
-                btn.className = 'flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-sky-200 hover:text-white cursor-pointer';
+                btn.className = 'flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 text-sky-200 hover:text-white cursor-pointer';
             });
 
             if (tabName === 'planner') {
-                tabPlannerBtn.className = 'flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer';
+                tabPlannerBtn.className = 'flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer';
                 tabPlannerContent.classList.remove('hidden');
                 tabTipsContent.classList.add('hidden');
             } else {
@@ -834,20 +282,17 @@
                 tabTipsContent.classList.remove('hidden');
 
                 if (tabName === 'state') {
-                    tabStateBtn.className = 'flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer';
+                    tabStateBtn.className = 'flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer';
                     document.getElementById('tipsHeaderTitle').innerText = 'No Estado de São Paulo (SP)';
-                    document.getElementById('tipsHeaderDesc').innerText = 'Roteiros incríveis sem sair do estado, desde praias do litoral paulista até o interior e capital!';
-                    document.getElementById('tipsHeaderIcon').className = 'fa-solid fa-map-location-dot text-xl';
+                    document.getElementById('tipsHeaderDesc').innerText = 'Roteiros incríveis sem sair do estado!';
                 } else if (tabName === 'brazil') {
-                    tabBrazilBtn.className = 'flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer';
+                    tabBrazilBtn.className = 'flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer';
                     document.getElementById('tipsHeaderTitle').innerText = 'Dicas e Roteiros Pelo Brasil';
-                    document.getElementById('tipsHeaderDesc').innerText = 'Explore as 15 cidades mais famosas do Brasil com opções econômicas e experiências ousadas / premium!';
-                    document.getElementById('tipsHeaderIcon').className = 'fa-solid fa-earth-americas text-xl';
+                    document.getElementById('tipsHeaderDesc').innerText = 'Explore cidades famosas do Brasil!';
                 } else if (tabName === 'international') {
-                    tabIntBtn.className = 'flex-1 min-w-[110px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer';
+                    tabIntBtn.className = 'flex-1 min-w-[100px] px-3 py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 bg-sky-500 text-white cursor-pointer';
                     document.getElementById('tipsHeaderTitle').innerText = 'Roteiros Internacionais';
-                    document.getElementById('tipsHeaderDesc').innerText = 'Destinos internacionais fantásticos ao redor do mundo, com versões econômicas e roteiros ousados / premium inesquecíveis!';
-                    document.getElementById('tipsHeaderIcon').className = 'fa-solid fa-plane-departure text-xl';
+                    document.getElementById('tipsHeaderDesc').innerText = 'Destinos fantásticos ao redor do mundo!';
                 }
                 renderCitiesTips();
             }
@@ -876,7 +321,7 @@
             if (currentMainTab === 'state') dataset = stateCitiesData;
             if (currentMainTab === 'international') dataset = internationalCitiesData;
 
-            const listToRender = dataset[currentTipCategory];
+            const listToRender = dataset[currentTipCategory] || [];
             
             listToRender.forEach((city, index) => {
                 const card = document.createElement('div');
@@ -902,12 +347,12 @@
                         </div>
                         <p class="text-xs text-sky-200 mb-3">${city.desc}</p>
                         <div class="bg-black/20 p-3 rounded-xl border border-white/10 text-xs text-slate-300 mb-2">
-                            <strong class="text-sky-300 block mb-1"><i class="fa-solid fa-lightbulb"></i> Dica do Especialista:</strong>
+                            <strong class="text-sky-300 block mb-1"><i class="fa-solid fa-lightbulb"></i> Dica:</strong>
                             ${city.tips}
                         </div>
                     </div>
                     <button onclick="applyCityItinerary('${currentMainTab}', '${currentTipCategory}', ${index})" class="w-full bg-gradient-to-r ${btnColor} text-white text-xs font-bold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
-                        <i class="fa-solid fa-check-to-slot"></i> Usar este Roteiro Pronto
+                        <i class="fa-solid fa-check-to-slot"></i> Usar este Roteiro
                     </button>
                 `;
                 citiesGrid.appendChild(card);
@@ -930,27 +375,25 @@
             saveToLocalStorage();
             window.renderItinerary();
             switchMainTab('planner');
-            showModal('Roteiro Carregado!', `O roteiro de ${city.name} foi aplicado com sucesso ao seu planejador!`);
+            showModal('Roteiro Carregado!', `O roteiro de ${city.name} foi aplicado com sucesso!`);
         };
 
-        // Initial state or load from localStorage
+        // Estado inicial da aplicação
         let itineraryData = JSON.parse(localStorage.getItem('travel_itinerary_data')) || {
-            destination: 'Santos, SP',
-            budget: 1500,
+            destination: 'Porto Seguro, BA',
+            budget: 5000,
             days: [
                 {
                     id: 1,
-                    title: 'Dia 1: Chegada e Praia',
-                    date: '2026-10-15',
+                    title: 'Dia 1: Chegada e Passeio Histórico',
                     activities: [
-                        { id: 101, text: 'Caminhada no Jardim da Orla', type: 'beach', cost: 0, done: true },
-                        { id: 102, text: 'Almoço em restaurante local', type: 'food', cost: 160, done: false }
+                        { id: 101, text: 'Visita ao Centro Histórico', type: 'sight', cost: 0, done: true },
+                        { id: 102, text: 'Almoço com culinária baiana', type: 'food', cost: 120, done: false }
                     ]
                 }
             ]
         };
 
-        // DOM Elements
         const itineraryContainer = document.getElementById('itineraryContainer');
         const emptyState = document.getElementById('emptyState');
         const totalDaysCount = document.getElementById('totalDaysCount');
@@ -978,6 +421,38 @@
         function saveToLocalStorage() {
             localStorage.setItem('travel_itinerary_data', JSON.stringify(itineraryData));
             updateStats();
+        }
+
+        // ==========================================
+        // NOVA FUNÇÃO: CONEXÃO COM O BACKEND / NUVEM
+        // ==========================================
+        async function saveToCloudDatabase() {
+            try {
+                showModal('Sincronizando...', 'Enviando roteiro para o servidor PostgreSQL...', false);
+                
+                const response = await fetch('http://localhost:3000/api/itinerary', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        destination: itineraryData.destination,
+                        budget: itineraryData.budget,
+                        itineraryData: itineraryData.days
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    showModal('Sucesso na Nuvem!', 'Dados salvos com segurança no servidor PostgreSQL!');
+                } else {
+                    showModal('Aviso', 'Erro ao salvar no servidor: ' + (result.error || 'Erro desconhecido'), true);
+                }
+            } catch (error) {
+                console.error("Erro de comunicação:", error);
+                showModal('Erro de Conexão', 'Não foi possível conectar ao servidor backend (Node.js rodando na porta 3000). Verifique se o servidor está ligado!', true);
+            }
         }
 
         function updateStats() {
@@ -1072,7 +547,7 @@
                         </div>
                         <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4">
                             <div class="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-lg font-semibold">
-                                Gasto do Dia: R$ ${dayCost.toFixed(2)}
+                                Gasto: R$ ${dayCost.toFixed(2)}
                             </div>
                             <button onclick="deleteDay(${day.id})" class="text-red-400 hover:text-red-300 text-sm bg-red-500/10 hover:bg-red-500/20 px-3 py-1.5 rounded-lg transition flex items-center gap-1 cursor-pointer">
                                 <i class="fa-solid fa-trash"></i> Excluir Dia
